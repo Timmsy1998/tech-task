@@ -13,9 +13,13 @@ use App\Domain\User\Actions\{
     ListUsersAction,
     GetUserAction
 };
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class UserController extends Controller
 {
+
+    use AuthorizesRequests;
+    
     /**
      * Display a paginated list of users.
      *
@@ -35,6 +39,7 @@ class UserController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', User::class);
         return view('users.create');
     }
 
@@ -47,6 +52,7 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
+        $this->authorize('create', User::class);
         (new CreateUserAction())->execute($request->validated());
 
         // Redirect back to user list with a success message
@@ -72,6 +78,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        $this->authorize('update', User::class);
         return view('users.edit', compact('user'));
     }
 
@@ -83,6 +90,7 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
+        $this->authorize('update', User::class);
         (new UpdateUserAction())->execute($user, $request->validated());
 
         return redirect()->route('users.index')->with('success', 'User updated successfully!');
@@ -95,6 +103,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        $this->authorize('delete', $user);
         (new DeleteUserAction())->execute($user);
 
         return redirect()->route('users.index')->with('success', 'User deleted successfully!');
