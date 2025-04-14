@@ -21,6 +21,7 @@ class AdminUserSeeder extends Seeder
                 'gender' => 'male',
                 'password' => Hash::make('password'),
                 'profile_picture' => null,
+                'is_admin' => true,
             ]
         );
     }

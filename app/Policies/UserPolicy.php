@@ -21,12 +21,12 @@ class UserPolicy
         return $authUser->is_admin;
     }
 
-    public function update(User $authUser, User $user): bool
+    public function update(User $authUser): bool
     {
         return $authUser->is_admin;
     }
 
-    public function delete(User $authUser, User $user): bool
+    public function delete(User $authUser): bool
     {
         return $authUser->is_admin;
     }
