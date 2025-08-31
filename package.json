@@ -1,4 +1,5 @@
 {
+    "name": "@apps/user-management-crud",
     "private": true,
     "type": "module",
     "scripts": {
